@@ -1,2 +1,1 @@
-# stock_price_prediction
-A new repository that aims to use ML to predict stock prices. This project is based off my maseters thesis in ML as well as another school project on stock prices predictions which is on my profile page. The goal of this repo is to determine the validity of a new process on predicting stock prices. Results could be positive of negative. There is no guarantee that accuract predictions will be able to be made.
+
