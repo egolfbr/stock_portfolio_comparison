@@ -1,5 +1,4 @@
 
-Steps: 
-1. Clone/download tarball and extract
-2. From directory run ```python setup.py install```
-3. Look at Example 
+Steps to run:
+1. Install via pip: ```pip install git+https://github.com/egolfbr/stock_portfolio_comparison.git```
+2. Look at Example 
