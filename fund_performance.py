@@ -92,10 +92,3 @@ def performance(tickers, weights, init_investment, start_date):
     plt.show()
     return spy_change, percent_chage, spy.index, latest_date
     
-
-
-
-
-my_portfolio = ["INTC", "NVDA", "TSLA", "PSX", "AAPL", "SPY"]
-weights = [0.1968, 0.1417,0.0649,0.2751,0.147,0.1731]
-spyc, myc,dates, start = preformance(my_portfolio, weights, 10000, start_date='2020-01-01')
