@@ -1,7 +1,7 @@
-import matplotlib.pyplot as plt 
+from turtle import up
+import yfinance as yf 
 import numpy as np 
-import yfinance as yf
-
+import matplotlib.pyplot as plt
 def performance(tickers, weights, init_investment, start_date):    
     init_value = []
     num_stocks = []
@@ -161,5 +161,16 @@ def performance(tickers, weights, init_investment, start_date):
     plt.xlabel("Date")
     plt.legend()
     plt.show()
-    return spy_change, percent_chage, spy_indicies_to_plot, latest_date
-    
+    return spy_change, percent_chage, spy.index, latest_date
+
+
+
+stocks = ["NVDA", "INTC", "PSX", "QCOM", "FSDIX", "SPY", "AAPL"]
+
+weight = [0.1442, 0.0867, 0.2779, 0.0634, 0.2239, 0.1710, 0.0329]
+
+cash = 5000 
+date = '2020-01-01'
+
+a, b, c = performance(stocks, weight, cash, date)
+
