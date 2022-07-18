@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np 
 import yfinance as yf
 
-def preformance(tickers, weights, init_investment, start_date):    
+def performance(tickers, weights, init_investment, start_date):    
     init_value = []
     num_stocks = []
     init_stock_price = []
