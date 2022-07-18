@@ -1,11 +1,11 @@
 from distutils.core import setup
 
-setup(name='fund performance comparison',
-      version='3.0',
+setup(name='Fund Performance Comparison Tool',
+      version='3.5',
       description='Compare fund preformance to S&P 500 ETF',
       author='Brian Egolf',
       author_email='egolfbr@miamioh.edu',
-      url='github.com',
+      url='https://github.com/egolfbr/stock_portfolio_comparison',
       py_modules=["fund_performance"],
       install_requires=["yfinance", "numpy", "matplotlib"]
      )
