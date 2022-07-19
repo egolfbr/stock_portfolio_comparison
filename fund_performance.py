@@ -6,11 +6,15 @@ def total_returns(all_data, num_stocks, initial_portfolio_value):
     # Start a list that will keep track of the portfolios % change day by day
     percent_chage = []
     # for each day 
-    for i in range(1, len(all_data[0])-1):
+    num_days = len(all_data[0])-1
+    for i in range(1, num_days):
         # declare a list that will hold all the prices for the stocks 
         new_prices = []
         # For each stock
+        indx = 0
         for dataframe in all_data:
+            print(f"Length of dataframe for stock {indx}: {len(dataframe)}")
+            indx = indx + 1
             # grab the prices for all the stocks at the current day 
             new_prices.append(dataframe.iloc[i]["Open"])
 
@@ -90,6 +94,28 @@ def return_data(drl):
         point = nextPoint
     return num_pos_days, num_neg_days
 
+def adjust_dataframes(all_data):
+    # check to make sure the latest date matches for all stocks
+    shortest_length = len(all_data[0])
+    first_date = all_data[0].index[0]
+    latest_date = first_date
+    for j in range(1, len(all_data)):
+        # if the amount of data is lower than the first (we can use < because it cannot be longer than since 
+        # since we specified a start date. It can only be equal to or less than)
+        current_dataframe_length = len(all_data[j])
+        if current_dataframe_length < shortest_length:
+            # if the lengths are different set the shortest length equal to the new length 
+            shortest_length = current_dataframe_length
+
+            # grab the starting date of the new dataframe
+            latest_date = all_data[j].index[0]
+            
+    # make sure that all dataframes start at the correct date
+    updated_data = []
+    for frame in all_data:
+        updated_data.append(frame.loc[latest_date:])
+    
+    return updated_data, latest_date
 
 def performance(tickers, weights, init_investment, start_date, plot=False):    
     init_value = []
@@ -102,26 +128,8 @@ def performance(tickers, weights, init_investment, start_date, plot=False):
         all_data.append(yf.download(ticker, start=start_date,interval="1d"))
     
     
-        
-    # check to make sure the latest date matches for all stocks
-    shortest_length = len(all_data[0])
-    first_date = all_data[0].index[0]
-    latest_date = first_date
-    for j in range(1, len(all_data)):
-        # if the amount of data is lower than the first (we can use != because it cannot be longer than since 
-        # since we specified a start date. It can only be equal to or less than)
-        if len(all_data[j]) != shortest_length:
-            # if the lengths are different set the shortest length equal to the new length 
-            shortest_length = len(all_data[j])
-
-            # grab the starting date of the new dataframe
-            latest_date = all_data[j].index[0]
-
-            
-    # make sure that all dataframes start at the correct date
-    updated_data = []
-    for frame in all_data:
-        updated_data.append(frame.loc[latest_date:])
+    updated_data, latest_date = adjust_dataframes(all_data)
+    
 
     all_data = updated_data
     # grab SPY data 
@@ -236,4 +244,3 @@ def performance(tickers, weights, init_investment, start_date, plot=False):
     print(f"Number of negative gain days: {neg_days} days")
 
     return spy_change, percent_chage, spy.index, latest_date, daily_returns_list
-    
