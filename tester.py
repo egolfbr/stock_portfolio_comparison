@@ -13,7 +13,6 @@ def total_returns(all_data, num_stocks, initial_portfolio_value):
         # For each stock
         indx = 0
         for dataframe in all_data:
-            print(f"Length of dataframe for stock {indx}: {len(dataframe)}")
             indx = indx + 1
             # grab the prices for all the stocks at the current day 
             new_prices.append(dataframe.iloc[i]["Open"])
@@ -32,6 +31,7 @@ def total_returns(all_data, num_stocks, initial_portfolio_value):
 def daily_returns(all_data, num_stocks, initial_portfolio_value):
     # Start a list that will keep track of the portfolios % change day by day
     percent_chage = []
+    cash_values = []
     # for each day 
     for i in range(1, len(all_data[0])-1):
         # declare a list that will hold all the prices for the stocks 
@@ -43,6 +43,7 @@ def daily_returns(all_data, num_stocks, initial_portfolio_value):
 
         # calculate the new value of the portfolio
         new_value = np.dot(num_stocks, new_prices)
+        cash_values.append(new_value)
 
         # calculate the difference
         diff = new_value - initial_portfolio_value
@@ -51,7 +52,17 @@ def daily_returns(all_data, num_stocks, initial_portfolio_value):
         # calculate the percent change
         percent_chage.append(diff/initial_portfolio_value)
 
-    return percent_chage
+    return percent_chage, cash_values
+
+def plot_cash_value(cash_values, spvalue, dates): 
+
+    plt.plot(dates, cash_values, label='Portfolio Cash Value')
+    plt.plot(dates, spvalue, label='S&P 500 Cash Value')
+    plt.xlabel("Dates")
+    plt.ylabel("Cash Value of Portfolio vs S&P 500")
+    plt.legend()
+    plt.title("Cash Value of Portfolio")
+    plt.show()
 
 def plot_returns(dates,drl, startindex=0):
     point = drl[startindex]
@@ -180,12 +191,12 @@ def performance(tickers, weights, init_investment, start_date, plot=False):
     # Start a list that will keep track of the portfolios % change day by day    
     percent_chage = total_returns(all_data, num_stocks, initial_portfolio_value)
    
-    daily_returns_list = daily_returns(all_data, num_stocks, initial_portfolio_value)
+    daily_returns_list, cash_value = daily_returns(all_data, num_stocks, initial_portfolio_value)
 
   
     # calculate change in S&P 
     spy_change = []
-
+    spy_cash = []
     #for each day 
     for i in range(1, len(spy)-1):
         # get the S&P price
@@ -193,7 +204,7 @@ def performance(tickers, weights, init_investment, start_date, plot=False):
 
          # get the new value of the S&P position
          next_day_value = num_spy_shares * next_day_price
-
+         spy_cash.append(next_day_value)
          # calculate the difference
          diff = next_day_value - init_spy_value
 
@@ -235,9 +246,11 @@ def performance(tickers, weights, init_investment, start_date, plot=False):
         plt.plot(spy_indicies_to_plot, percent_chage, color='red', label="My Portfolio")
         plt.ylabel("% change")
         plt.xlabel("Date")
+        plt.title("Total % change in Portfolio Value vs S&P 500")
         plt.legend()
         plt.show()
         plot_returns(spy.index, daily_returns_list,500)
+        plot_cash_value(cash_value,spy_cash,spy_indicies_to_plot)
 
     pos_days, neg_days = return_data(daily_returns_list)
     print(f"Number of positive gain days: {pos_days} days")
