@@ -127,7 +127,7 @@ def adjust_dataframes(all_data):
     
     return updated_data, latest_date
 
-def performance(tickers, weights, init_investment, start_date, plot=False):    
+def performance(tickers, weights, init_investment, start_date, plot=False, daily_return_plot_start_idx = 0):    
     init_value = []
     num_stocks = []
     init_stock_price = []
@@ -248,7 +248,7 @@ def performance(tickers, weights, init_investment, start_date, plot=False):
         plt.title("Total % change in Portfolio Value vs S&P 500")
         plt.legend()
         plt.show()
-        plot_returns(spy.index, daily_returns_list,500)
+        plot_returns(spy.index, daily_returns_list, daily_return_plot_start_idx)
         plot_cash_value(cash_value,spy_cash,spy_indicies_to_plot)
 
     pos_days, neg_days = return_data(daily_returns_list)

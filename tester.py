@@ -55,7 +55,6 @@ def daily_returns(all_data, num_stocks, initial_portfolio_value):
     return percent_chage, cash_values
 
 def plot_cash_value(cash_values, spvalue, dates): 
-
     plt.plot(dates, cash_values, label='Portfolio Cash Value')
     plt.plot(dates, spvalue, label='S&P 500 Cash Value')
     plt.xlabel("Dates")
