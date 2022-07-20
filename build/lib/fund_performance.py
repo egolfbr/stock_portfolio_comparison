@@ -13,7 +13,6 @@ def total_returns(all_data, num_stocks, initial_portfolio_value):
         # For each stock
         indx = 0
         for dataframe in all_data:
-            print(f"Length of dataframe for stock {indx}: {len(dataframe)}")
             indx = indx + 1
             # grab the prices for all the stocks at the current day 
             new_prices.append(dataframe.iloc[i]["Open"])
