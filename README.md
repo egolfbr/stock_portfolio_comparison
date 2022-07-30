@@ -12,4 +12,6 @@ Steps to run:
 Image from Example script:
 
 ![Portfolio vs S&P 500 ETF](./pics/Figure_1.png)
-![Daily Returns](./pics/Figure_1_2.png)
+
+
+This will be updated with more functinoality and eventually rolled into a package instead of a module. As of 7/30/22 this module has the functionality to show you historical performance of a weighted portfolio against the S&P 500, model future dividend performance of a single stock and a weighted portfolio, and show how exposed to a single sector or industry a weighted portfolio is via a ring/pie chart. Future updates will allow for more intuitive dividend modeling, and more performance metrics and modeling options. Feel free to contribute or message suggesttions.
