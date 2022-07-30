@@ -1,4 +1,5 @@
 from fund_performance import performance
+from fund_performance import show_sector_exposure
 
 stocks = ["NVDA", "INTC", "PSX", "QCOM", "FSDIX", "SPY", "AAPL"]
 
@@ -9,3 +10,5 @@ cash = 5000
 date = '2020-01-01'
 
 spy_changes, portfolio_chages, dates, startdate, daily_return_list = performance(stocks, weights, cash, date, plot=True)
+
+show_sector_exposure(stocks, weights)
