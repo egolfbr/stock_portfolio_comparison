@@ -407,6 +407,7 @@ def show_sector_exposure(stocks, weights):
     my_circle = plt.Circle((0,0), 0.7, color='white')
     p = plt.gca()
     p.add_artist((my_circle))
+    plt.show()
 
 
 
