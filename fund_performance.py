@@ -375,7 +375,30 @@ def div_performance(stocks, weights, init_invest, recurring_deposit, recurring_r
 
     return totals, dataframes
 
-         
+
+def show_sector_exposure(stocks, weights):
+    sect_totals = {}
+    indus_totals = {}
+    for t in stocks:
+        idx = stocks.index(t) 
+        obj = yf.Ticker(t)
+        d = obj.get_info()
+        sect = d['sector']
+        ind = d['industry']
+        if sect not in sect_totals.keys(): 
+            sect_totals[sect] = weights[idx]
+        else: 
+            sect_totals[sect] = sect_totals[sect] + weights[idx]
+        if ind not in indus_totals.keys(): 
+            indus_totals[ind] = weights[idx]
+        else: 
+            indus_totals[ind] = indus_totals[ind] + weights[idx]
+        
+    plt.pie(sect_totals.values(), labels=sect_totals.keys())
+
+    my_circle = plt.Circle((0,0), 0.7, color='white')
+    p = plt.gca()
+    p.add_artist((my_circle))
 
 
 
