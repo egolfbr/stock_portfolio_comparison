@@ -383,16 +383,24 @@ def show_sector_exposure(stocks, weights):
         idx = stocks.index(t) 
         obj = yf.Ticker(t)
         d = obj.get_info()
-        sect = d['sector']
-        ind = d['industry']
-        if sect not in sect_totals.keys(): 
-            sect_totals[sect] = weights[idx]
-        else: 
-            sect_totals[sect] = sect_totals[sect] + weights[idx]
-        if ind not in indus_totals.keys(): 
-            indus_totals[ind] = weights[idx]
-        else: 
-            indus_totals[ind] = indus_totals[ind] + weights[idx]
+        ty = d['quoteType']
+
+        if ty == 'MUTUALFUND' or ty == 'ETF':
+            if ty not in sect_totals.keys():
+                sect_totals[ty] = weights[idx]
+            else: 
+                sect_totals[ty] = sect_totals[ty]+ weights[idx]
+        else:
+            sect = d['sector']
+            ind = d['industry']
+            if sect not in sect_totals.keys(): 
+                sect_totals[sect] = weights[idx]
+            else: 
+                sect_totals[sect] = sect_totals[sect] + weights[idx]
+            if ind not in indus_totals.keys(): 
+                indus_totals[ind] = weights[idx]
+            else: 
+                indus_totals[ind] = indus_totals[ind] + weights[idx]
         
     plt.pie(sect_totals.values(), labels=sect_totals.keys())
 
