@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='Fund Performance Comparison Tool',
-      version='4.0.1',
+      version='4.0.2',
       description='Compare fund preformance to S&P 500 ETF',
       author='Brian Egolf',
       author_email='egolfbr@miamioh.edu',

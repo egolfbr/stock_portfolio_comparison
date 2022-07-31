@@ -378,30 +378,81 @@ def div_performance(stocks, weights, init_invest, recurring_deposit, recurring_r
 
 def show_sector_exposure(stocks, weights):
     sect_totals = {}
-    indus_totals = {}
     for t in stocks:
         idx = stocks.index(t) 
         obj = yf.Ticker(t)
         d = obj.get_info()
         ty = d['quoteType']
 
+        # if the ticker is an ETF or mutual fund, we need to grab the weights of that security
         if ty == 'MUTUALFUND' or ty == 'ETF':
-            if ty not in sect_totals.keys():
-                sect_totals[ty] = weights[idx]
-            else: 
-                sect_totals[ty] = sect_totals[ty]+ weights[idx]
+            # grab the sector weights in 
+            sectWeights = d['sectorWeightings']
+            sw = {}
+            for dic in sectWeights: 
+                k = list(dic.keys())
+                sw[k[0]] = dic[k[0]]
+
+            # rename all to be same as other dictionary
+            # unfortunately the sectors are spelled differently with different case and underscores
+            # need to remove and spell the same as the equity security types in order to match 
+
+            temp = {}
+            for s in sw.keys():
+                if s == 'realestate': 
+                    temp["Real Estate"] = sw[s]
+
+                elif s == 'consumer_cyclical': 
+                    temp['Consumer Cyclical'] = sw[s] 
+
+                elif s == 'basic_materials': 
+                    temp["Basic Materials"] = sw[s] 
+
+                elif s == 'consumer_defensive': 
+                    temp['Consumer Defensive'] = sw[s] 
+
+                elif s == 'technology': 
+                    temp['Technology'] = sw[s] 
+
+                elif s == 'communication_services': 
+                    temp['Communication Services']  = sw[s]
+
+                elif s == 'financial_services': 
+                    temp['Financial Services'] = sw[s] 
+                    
+                elif s == 'utilities': 
+                    temp['Utilities'] = sw[s]
+
+                elif s == 'industrials': 
+                    temp['Industrials'] = sw[s] 
+
+                elif s == 'energy': 
+                    temp['Energy'] = sw[s] 
+
+                else: 
+                    temp['Health Care'] = sw[s]
+
+            # loop through temp dictionary and check if the sector has been added to the sector values yet
+            for key in temp.keys(): 
+                # if there is not already a sector in the dictionary, add it 
+                if key not in sect_totals.keys(): 
+                    sect_totals[key] = weights[idx]
+                # else add it to the current value
+                else: 
+                    sect_totals[key] = sect_totals[key] + weights[idx]
         else:
+            # for equity security types (stocks)
+            # grab the sector 
             sect = d['sector']
-            ind = d['industry']
+
+            # check to see if it is in the dictionary
             if sect not in sect_totals.keys(): 
                 sect_totals[sect] = weights[idx]
             else: 
                 sect_totals[sect] = sect_totals[sect] + weights[idx]
-            if ind not in indus_totals.keys(): 
-                indus_totals[ind] = weights[idx]
-            else: 
-                indus_totals[ind] = indus_totals[ind] + weights[idx]
         
+
+    # display 
     plt.pie(sect_totals.values(), labels=sect_totals.keys())
 
     my_circle = plt.Circle((0,0), 0.7, color='white')
