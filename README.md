@@ -25,4 +25,7 @@ Send ETH to:
 
 <img src="./pics/eth.png" width="250">
 
+venmo: 
+
+<img src="./pics/venmo.JPG" height="250">
 
