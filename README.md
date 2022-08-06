@@ -21,7 +21,6 @@ If you feel that this has helped you in any way, please consider donating. This 
 
 Send BTC to: 3Ef5RzoTv5fih2S8NsQUUFucueVBW4Gohg
 
-Send ETF to: ![ether](./pics/eth.png)
+Send ETH to: ![ether](./pics/eth.png =250x250)
 
-
-Venmo: ![venmo](./pics/venmo.png)
+Venmo: ![venmo](./pics/venmo.jpg)
