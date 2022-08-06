@@ -19,6 +19,9 @@ This will be updated with more functinoality and eventually rolled into a packag
 ### Donate
 If you feel that this has helped you in any way, please consider donating. This is completly free to use and this is in no way a requirement. 
 
-- Send BTC to: 3Ef5RzoTv5fih2S8NsQUUFucueVBW4Gohg
-- Send ETF to: ![ether](./pics/eth.png)
-- Venmo: ![venmo](./pics/venmo.png)
+Send BTC to: 3Ef5RzoTv5fih2S8NsQUUFucueVBW4Gohg
+
+Send ETF to: ![ether](./pics/eth.png)
+
+
+Venmo: ![venmo](./pics/venmo.png)
