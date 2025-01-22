@@ -16,16 +16,6 @@ Image from Example script:
 
 This will be updated with more functinoality and eventually rolled into a package instead of a module. As of 7/30/22 this module has the functionality to show you historical performance of a weighted portfolio against the S&P 500, model future dividend performance of a single stock and a weighted portfolio, and show how exposed to a single sector or industry a weighted portfolio is via a ring/pie chart. Future updates will allow for more intuitive dividend modeling, and more performance metrics and modeling options. Feel free to contribute or message suggesttions.
 
-### Donate
-If you feel that this has helped you in any way, please consider donating. This is completly free to use and this is in no way a requirement. 
 
-Send BTC to: 3Ef5RzoTv5fih2S8NsQUUFucueVBW4Gohg
 
-Send ETH to: 
-
-<img src="./pics/eth.png" width="250">
-
-venmo: 
-
-<img src="./pics/venmo.JPG" height="250">
 
